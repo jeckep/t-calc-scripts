@@ -80,6 +80,9 @@ async function loadDataForToken(token){
 
     // в портфель сохраняем список операций ввода вывода средств
     portfolio.operations = await getOperationsFor(account.id);
+    portfolio.account = account;
+    portfolio.accountId = account.id;
+    portfolio.ts = Date.now();
   }
 
   // функция получения операций ввода-вывода средств
