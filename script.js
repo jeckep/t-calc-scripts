@@ -85,7 +85,7 @@ async function loadDataForToken(token){
     portfolio.ts = Date.now();
   }
 
-  // функция получения операций ввода-вывода средств
+  // функция получения операций ввода-вывода, налогов и комиссий средств
   async function getOperationsFor(accountId) {
     const body = (cursor, accountId) => {
       return {
@@ -93,7 +93,41 @@ async function loadDataForToken(token){
         "cursor": cursor,
         "limit": 1000,
         "operationTypes": [
-          "OPERATION_TYPE_INPUT", "OPERATION_TYPE_OUTPUT"
+          "OPERATION_TYPE_INPUT", "OPERATION_TYPE_OUTPUT", "OPERATION_TYPE_INPUT_SWIFT", "OPERATION_TYPE_OUTPUT_SWIFT",
+          // Удержание налога.
+          "OPERATION_TYPE_TAX",
+          // Удержание НДФЛ по купонам.
+          "OPERATION_TYPE_BOND_TAX",
+          // Удержание налога по дивидендам.
+          "OPERATION_TYPE_DIVIDEND_TAX",
+          // Удержание налога по дивидендам по ставке 15%.
+          "OPERATION_TYPE_DIVIDEND_TAX_PROGRESSIVE",
+          // Удержание налога за материальную выгоду.
+          "OPERATION_TYPE_BENEFIT_TAX",
+          // Удержание налога по ставке 15%.
+          "OPERATION_TYPE_TAX_PROGRESSIVE",
+          // Удержание налога по купонам по ставке 15%.
+          "OPERATION_TYPE_BOND_TAX_PROGRESSIVE",
+          // Удержание налога за материальную выгоду по ставке 15%.
+          "OPERATION_TYPE_BENEFIT_TAX_PROGRESSIVE",
+          // Удержание налога за возмещение по сделкам РЕПО по ставке 15%.
+          "OPERATION_TYPE_TAX_REPO_PROGRESSIVE",
+          // Удержание налога за возмещение по сделкам РЕПО.
+          "OPERATION_TYPE_TAX_REPO",
+          // Удержание налога по сделкам РЕПО.
+          "OPERATION_TYPE_TAX_REPO_HOLD",
+          // Удержание налога по сделкам РЕПО по ставке 15%.
+          "OPERATION_TYPE_TAX_REPO_HOLD_PROGRESSIVE",
+          // Корректировка налога.
+          "OPERATION_TYPE_TAX_CORRECTION",
+          // Корректировка налога по ставке 15%.
+          "OPERATION_TYPE_TAX_CORRECTION_PROGRESSIVE",
+          // Возврат налога по сделкам РЕПО по ставке 15%.
+          "OPERATION_TYPE_TAX_REPO_REFUND_PROGRESSIVE",
+          // Возврат налога по сделкам РЕПО.
+          "OPERATION_TYPE_TAX_REPO_REFUND",
+          // Корректировка налога по купонам.
+          "OPERATION_TYPE_TAX_CORRECTION_COUPON",
         ],
         "state": "OPERATION_STATE_EXECUTED"
       }
