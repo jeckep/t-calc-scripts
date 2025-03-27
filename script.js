@@ -1,5 +1,6 @@
 import { createReadStream, writeFile } from 'node:fs';
 import readline from 'node:readline';
+import {OperationType} from "../src/app/tinkoff/operations.pb";
 
 async function readNonEmptyLines(filePath) {
   const fileStream = createReadStream(filePath);
@@ -128,6 +129,26 @@ async function loadDataForToken(token){
           "OPERATION_TYPE_TAX_REPO_REFUND",
           // Корректировка налога по купонам.
           "OPERATION_TYPE_TAX_CORRECTION_COUPON",
+          // Удержание комиссии за обслуживание брокерского счёта.
+          "OPERATION_TYPE_SERVICE_FEE",
+          // Удержание комиссии за непокрытую позицию.
+          "OPERATION_TYPE_MARGIN_FEE",
+          // Удержание комиссии за операцию.
+          "OPERATION_TYPE_BROKER_FEE",
+          // Удержание комиссии SuccessFee.
+          "OPERATION_TYPE_SUCCESS_FEE",
+          // Комиссия за управление по счёту автоследования.
+          "OPERATION_TYPE_TRACK_MFEE",
+          // Комиссия за результат по счёту автоследования.
+          "OPERATION_TYPE_TRACK_PFEE",
+          // Комиссия за валютный остаток.
+          "OPERATION_TYPE_CASH_FEE",
+          // Комиссия за вывод валюты с брокерского счёта.
+          "OPERATION_TYPE_OUT_FEE",
+          // 	Комиссия за вывод средств.
+          "OPERATION_TYPE_OUTPUT_PENALTY",
+            //  Списание комиссии.
+          "OPERATION_TYPE_OVER_COM",
         ],
         "state": "OPERATION_STATE_EXECUTED"
       }
