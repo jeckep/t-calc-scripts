@@ -1,6 +1,5 @@
 import { createReadStream, writeFile } from 'node:fs';
 import readline from 'node:readline';
-import {OperationType} from "../src/app/tinkoff/operations.pb";
 
 async function readNonEmptyLines(filePath) {
   const fileStream = createReadStream(filePath);
@@ -71,6 +70,7 @@ async function loadDataForToken(token){
   // Получаем данные портфелей
   const portfolios = [];
   for (let account of accs.accounts) {
+    console.log("Получаем данные для счета " + account.id + "|" + account.name);
     requestBody = {
       "accountId": account.id,
       "currency": "RUB"
@@ -158,12 +158,14 @@ async function loadDataForToken(token){
     let cursor = ""
     let hasNext = true;
     do {
+      console.log("Получаем 1000 операций....")
       const resp = await myFetch(JSON.stringify(body(cursor, accountId)), 'OperationsService/GetOperationsByCursor', token);
       const ops = await resp.json();
       operations.push(...ops.items);
-      cursor = ops.cursor;
+      cursor = ops.nextCursor;
       hasNext = ops.hasNext;
-    } while (hasNext);
+      console.log(`hasNext: ${hasNext} next cursor: ${cursor}`);
+    } while (hasNext && cursor);
 
     return operations.map(op => {return {
       currency: op.payment.currency,
@@ -194,7 +196,7 @@ for (let token of tokens) {
   }
 }
 
-// Записываем результат в файл
+console.log("Записываем результат в файл");
 const fileName = 't-calc-data.json';
 writeFile(fileName, JSON.stringify({data: data},null, 2), 'utf8', () => {});
 
