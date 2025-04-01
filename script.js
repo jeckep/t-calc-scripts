@@ -171,7 +171,8 @@ async function loadDataForToken(token){
       currency: op.payment.currency,
       amount: +op.payment.units,
       dateStr: op.date,
-      description: op.description
+      description: op.description,
+      typeStr: op.type
     }});
   }
 
