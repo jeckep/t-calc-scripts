@@ -149,6 +149,8 @@ async function loadDataForToken(token){
           "OPERATION_TYPE_OUTPUT_PENALTY",
             //  Списание комиссии.
           "OPERATION_TYPE_OVER_COM",
+          // Гербовый сбор.
+          "OPERATION_TYPE_OUT_STAMP_DUTY"
         ],
         "state": "OPERATION_STATE_EXECUTED"
       }
