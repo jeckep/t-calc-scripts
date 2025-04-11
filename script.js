@@ -171,7 +171,7 @@ async function loadDataForToken(token){
 
     return operations.map(op => {return {
       currency: op.payment.currency,
-      amount: +op.payment.units,
+      amount: +op.payment.units + op.payment.nano/1000_000_000,
       dateStr: op.date,
       description: op.description,
       typeStr: op.type
