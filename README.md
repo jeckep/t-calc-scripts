@@ -5,7 +5,7 @@
    Сохраните токен куда-нибудь (или в файл tokens.txt).
 
 ## Простая установка для Windows (10 и выше)
-1. Скачайте последнюю [версию скрипта](https://github.com/jeckep/t-calc-scripts/archive/refs/tags/v0.3.zip) и распакуйте
+1. Скачайте последнюю [версию скрипта](https://github.com/jeckep/t-calc-scripts/archive/refs/tags/v0.4.zip) и распакуйте
 2. В распакованной папке двойной клик на install.bat
 
 ## Запуск скрипта
